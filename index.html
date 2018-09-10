@@ -15,41 +15,64 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                        <div class="alert alert-primary" role="alert">
-                            For more information on this great wash recipe <a href="https://homedistiller.org/forum/viewtopic.php?f=14&t=5018" target="_blank">read Birdwatchers sugar wash recipe</a>.
-                        </div>
-                        <div class="alert alert-secondary" role="alert">
-                            Adjust any value and the others will be automatically re-calculated.
-                        </div>
+                    <div class="alert alert-primary" role="alert">
+                        For more information on this great wash recipe <a href="https://homedistiller.org/forum/viewtopic.php?f=14&t=5018" target="_blank">read Birdwatchers sugar wash recipe</a>.
+                    </div>
+                    <div class="alert alert-secondary" role="alert">
+                        Adjust any value and the others will be automatically re-calculated. Handy for when you're running a bit low on one ingredient and can't be bothered heading to the shops.
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
                     <form>
                         <div class="form-group">
-                            <label for="finalWashVolume">Final Wash Volume (L)</label>
-                            <input type="number" class="form-control" id="finalWashVolume" aria-describedby="finalWashVolumeHelp" value="25" step="0.01">
-                            <small id="finalWashVolumeHelp" class="form-text text-muted">This is the total volume of the wash after adding all ingredients including water.</small>
+                            <label for="metricFinalWashVolume">Final Wash Volume (L)</label>
+                            <input type="number" class="form-control" id="metricFinalWashVolume" aria-describedby="metricFinalWashVolumeHelp" value="25" step="0.01">
                         </div>
                         <div class="form-group">
-                            <label for="sugar">Sugar (kg)</label>
-                            <input type="number" class="form-control" id="sugar" aria-describedby="sugarHelp" step="0.01">
-                            <small id="sugarHelp" class="form-text text-muted"></small>
+                            <label for="metricSugar">Sugar (kg)</label>
+                            <input type="number" class="form-control" id="metricSugar" step="0.01" data-multiplier="0.225">
                         </div>
                         <div class="form-group">
-                            <label for="tomatoPaste">Tomato paste (g)</label>
-                            <input type="number" class="form-control" id="tomatoPaste" aria-describedby="tomatoPasteHelp">
-                            <small id="tomatoPasteHelp" class="form-text text-muted"></small>
+                            <label for="metricTomatoPaste">Tomato paste (g)</label>
+                            <input type="number" class="form-control" id="metricTomatoPaste" data-multiplier="9.825">
                         </div>
                         <div class="form-group">
-                            <label for="lemonJuice">Lemon juice (ml)</label>
-                            <input type="number" class="form-control" id="lemonJuice" aria-describedby="lemonJuiceHelp">
-                            <small id="lemonJuiceHelp" class="form-text text-muted"></small>
+                            <label for="metricLemonJuice">Lemon juice (ml)</label>
+                            <input type="number" class="form-control" id="metricLemonJuice" data-multiplier="3.3831">
                         </div>
                         <div class="form-group">
-                            <label for="yeast">Dried yeast (g)</label>
-                            <input type="number" class="form-control" id="yeast" aria-describedby="yeastHelp">
-                            <small id="yeastHelp" class="form-text text-muted"></small>
+                            <label for="metricYeast">Dried yeast (g)</label>
+                            <input type="number" class="form-control" id="metricYeast" data-multiplier="2.812">
                         </div>
                     </form>
                 </div>
-            </div>
+                <div class="col">
+                        <form>
+                            <div class="form-group">
+                                <label for="imperialFinalWashVolume">Final Wash Volume (gallons)</label>
+                                <input type="number" class="form-control" id="imperialFinalWashVolume" aria-describedby="imperialFinalWashVolumeHelp" step="0.01" data-multiplier="0.264172">
+                            </div>
+                            <div class="form-group">
+                                <label for="imperialSugar">Sugar (lb)</label>
+                                <input type="number" class="form-control" id="imperialSugar" step="0.01" data-multiplier="0.4960395">
+                            </div>
+                            <div class="form-group">
+                                <label for="imperialTomatoPaste">Tomato paste (oz)</label>
+                                <input type="number" class="form-control" id="imperialTomatoPaste" step="0.01" data-multiplier="0.34656705">
+                            </div>
+                            <div class="form-group">
+                                <label for="imperialLemonJuice">Lemon juice (fl oz)</label>
+                                <input type="number" class="form-control" id="imperialLemonJuice" step="0.01" data-multiplier="0.11439622019637">
+                            </div>
+                            <div class="form-group">
+                                <label for="imperialYeast">Dried yeast (oz)</label>
+                                <input type="number" class="form-control" id="imperialYeast" step="0.01" data-multiplier="0.099190488">
+                            </div>
+                        </form>
+                    </div>
+                </div>
         </div>
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/popper.min.js"></script>

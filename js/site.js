@@ -1,52 +1,43 @@
 (function(tpwCalculator, $, undefined) {
-    var $finalWashVolume = $("#finalWashVolume");
-    var $outputs = {
-        sugar: $("#sugar"),
-        tomatoPaste: $("#tomatoPaste"),
-        lemonJuice: $("#lemonJuice"),
-        yeast: $("#yeast")
-    };
+    var $metricFinalWashVolume = $("#metricFinalWashVolume");
+    var $outputs = $("input[data-multiplier]");
     
-    var ingredientMultipliers = {
-        sugar: 0.225,
-        tomatoPaste: 9.825,
-        lemonJuice: 3.3831,
-        yeast: 2.812
-    };
-
     function roundNumberByStepValue(number, stepValue)
     {
         var inverseStep = 1 / stepValue;
         return Math.round(number * inverseStep) / inverseStep;
     }
 
-    function finalWashVolumeChangeHandler()
+    function metricFinalWashVolumeChangeHandler()
     {
-        var finalWashVolume = $finalWashVolume.val();
-        $.each($outputs, function(fieldName, $field) {
+        var finalWashVolume = Number($metricFinalWashVolume.val());
+        $outputs.each(function(index, field) {
+            var $field = $(field);
             var fieldStep = $field.attr("step") || 1;
-            var newValue = finalWashVolume * ingredientMultipliers[fieldName];
+            var multiplier = Number($field.data("multiplier"));
+            var newValue = finalWashVolume * multiplier;
             $field.val(roundNumberByStepValue(newValue, fieldStep));
         });
     };
 
     function otherIngredientChangeHandler()
     {
-        var ingredientName = $(this).attr("id");
-        var ingredientValue = $(this).val();
-        var newfinalWashValue = ingredientValue / ingredientMultipliers[ingredientName];
-        var finalWashStep = $finalWashVolume.attr("step") || 1;
-        $finalWashVolume.val(roundNumberByStepValue(newfinalWashValue, finalWashStep));
-        $finalWashVolume.change();
+        var ingredientValue = Number($(this).val());
+        var multiplier = Number($(this).data("multiplier"));
+        var newfinalWashValue = ingredientValue / multiplier;
+        var finalWashStep = $metricFinalWashVolume.attr("step") || 1;
+        $metricFinalWashVolume.val(roundNumberByStepValue(newfinalWashValue, finalWashStep));
+        $metricFinalWashVolume.change();
     };
     
 
     // hookup event handlers
-    $finalWashVolume.change(finalWashVolumeChangeHandler);
-    $finalWashVolume.on('input', finalWashVolumeChangeHandler);
-    finalWashVolumeChangeHandler();
+    $metricFinalWashVolume.change(metricFinalWashVolumeChangeHandler);
+    $metricFinalWashVolume.on('input', metricFinalWashVolumeChangeHandler);
+    metricFinalWashVolumeChangeHandler();
 
-    $.each($outputs, function(fieldName, $field) {
+    $outputs.each(function(index, field) {
+        var $field = $(field);
         $field.change(otherIngredientChangeHandler);
         $field.on('input', otherIngredientChangeHandler);
     });
