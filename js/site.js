@@ -14,10 +14,10 @@
         yeast: 2.812
     };
 
-    function roundNumber(number, places)
+    function roundNumberByStepValue(number, stepValue)
     {
-        var places10 = Math.pow(10, places);
-        return Math.round(number * places10) / places10;
+        var inverseStep = 1 / stepValue;
+        return Math.round(number * inverseStep) / inverseStep;
     }
 
     function finalWashVolumeChangeHandler()
@@ -25,15 +25,29 @@
         var finalWashVolume = $finalWashVolume.val();
         $.each($outputs, function(fieldName, $field) {
             var fieldStep = $field.attr("step") || 1;
-            var inverseStep = 1 / fieldStep;
             var newValue = finalWashVolume * ingredientMultipliers[fieldName];
-            newValue = Math.round(newValue * inverseStep) / inverseStep;
-            $field.val(newValue);
+            $field.val(roundNumberByStepValue(newValue, fieldStep));
         });
+    };
+
+    function otherIngredientChangeHandler()
+    {
+        var ingredientName = $(this).attr("id");
+        var ingredientValue = $(this).val();
+        var newfinalWashValue = ingredientValue / ingredientMultipliers[ingredientName];
+        var finalWashStep = $finalWashVolume.attr("step") || 1;
+        $finalWashVolume.val(roundNumberByStepValue(newfinalWashValue, finalWashStep));
+        $finalWashVolume.change();
     };
     
 
     // hookup event handlers
+    $finalWashVolume.change(finalWashVolumeChangeHandler);
     $finalWashVolume.on('input', finalWashVolumeChangeHandler);
     finalWashVolumeChangeHandler();
+
+    $.each($outputs, function(fieldName, $field) {
+        $field.change(otherIngredientChangeHandler);
+        $field.on('input', otherIngredientChangeHandler);
+    });
 }(window.tpwCalculator = window.tpwCalculator || {}, jQuery));
